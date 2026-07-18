@@ -158,6 +158,52 @@
             </div>
         </section>
     </main>
+<!-- ======================= LOGIK INTERAKTIF DASHBOARD ADMIN ======================= -->
+    <script>
+        // Fungsi untuk menyetujui event (Terima)
+        document.querySelectorAll('button.bg-emerald-600').forEach(button => {
+            button.addEventListener('click', function() {
+                // Cari baris tabel (tr) tempat tombol ini berada
+                const row = this.closest('tr');
+                const namaEvent = row.querySelector('td:first-child').innerText;
+                
+                // Efek visual sukses
+                alert(`Sukses! Event "${namaEvent}" telah disetujui dan resmi live di halaman utama.`);
+                row.remove(); // Hapus baris dari tabel persetujuan
+                
+                // Update counter notifikasi (opsional/dummy)
+                updateCounter();
+            });
+        });
 
+        // Fungsi untuk menolak event
+        document.querySelectorAll('button.bg-red-50').forEach(button => {
+            button.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const namaEvent = row.querySelector('td:first-child').innerText;
+                
+                if (confirm(`Apakah lu yakin ingin MENOLAK event "${namaEvent}"?`)) {
+                    row.remove();
+                    updateCounter();
+                }
+            });
+        });
+
+        // Fungsi sederhana untuk update angka counter "Butuh Konfirmasi"
+        function updateCounter() {
+            const remainingEvents = document.querySelectorAll('tbody tr').length;
+            const badge = document.querySelector('.bg-orange-100');
+            const sidebarBadge = document.querySelector('.bg-orange-500');
+            
+            if (remainingEvents === 0) {
+                if(badge) badge.innerText = "Semua Beres!";
+                if(badge) badge.className = "bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full";
+                if(sidebarBadge) sidebarBadge.remove();
+            } else {
+                if(badge) badge.innerText = `${remainingEvents} Butuh Konfirmasi`;
+                if(sidebarBadge) sidebarBadge.innerText = remainingEvents;
+            }
+        }
+    </script>
 </body>
 </html>
