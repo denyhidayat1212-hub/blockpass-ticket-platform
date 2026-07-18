@@ -23,24 +23,21 @@
                 </div>
             </div>
 
-            <!-- Menu Navigasi -->
-            <nav class="space-y-1">
-                <a href="#" class="flex items-center gap-3 px-3 py-2.5 bg-blue-600 rounded-lg text-white text-sm font-semibold transition-colors">
+            <!-- Menu Navigasi (HREF diganti pemicu fungsi JS) -->
+            <nav class="space-y-1" id="admin-nav">
+                <button onclick="switchTab('dashboard', this)" class="w-full flex items-center gap-3 px-3 py-2.5 bg-blue-600 rounded-lg text-white text-sm font-semibold transition-colors cursor-pointer text-left target-menu">
                     <i class="fa-solid fa-chart-pie text-lg w-5"></i> Dashboard
-                </a>
-                <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg text-sm font-medium transition-colors">
+                </button>
+                <button onclick="switchTab('persetujuan', this)" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg text-sm font-medium transition-colors cursor-pointer text-left target-menu">
                     <i class="fa-solid fa-calendar-check text-lg w-5"></i> Persetujuan Event
-                    <span class="ml-auto bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">2</span>
-                </a>
-                <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg text-sm font-medium transition-colors">
+                    <span id="sidebar-badge" class="ml-auto bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">2</span>
+                </button>
+                <button onclick="switchTab('tiket', this)" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg text-sm font-medium transition-colors cursor-pointer text-left target-menu">
                     <i class="fa-solid fa-ticket text-lg w-5"></i> Tiket Terjual
-                </a>
-                <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg text-sm font-medium transition-colors">
+                </button>
+                <button onclick="switchTab('customer', this)" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg text-sm font-medium transition-colors cursor-pointer text-left target-menu">
                     <i class="fa-solid fa-users text-lg w-5"></i> Data Customer
-                </a>
-                <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg text-sm font-medium transition-colors">
-                    <i class="fa-solid fa-sliders text-lg w-5"></i> Pengaturan Sistem
-                </a>
+                </button>
             </nav>
         </div>
 
@@ -65,8 +62,8 @@
         <!-- Top Bar -->
         <header class="flex justify-between items-center mb-8 bg-white p-4 rounded-xl shadow-xs border border-gray-200/80">
             <div>
-                <h1 class="text-xl font-bold text-gray-900">Selamat Datang Kembali, Bos!</h1>
-                <p class="text-xs text-gray-500">Berikut adalah rangkuman performa platform tiket online lu hari ini.</p>
+                <h1 class="text-xl font-bold text-gray-900" id="header-title">Selamat Datang Kembali, Bos!</h1>
+                <p class="text-xs text-gray-500" id="header-desc">Berikut adalah rangkuman performa platform tiket online lu hari ini.</p>
             </div>
             <div class="flex items-center gap-4 text-sm">
                 <span class="text-gray-500"><i class="fa-regular fa-clock mr-1"></i> Live Monitoring</span>
@@ -76,128 +73,188 @@
             </div>
         </header>
 
-        <!-- STATISTIK UTAMA -->
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white p-5 rounded-xl shadow-xs border border-gray-200">
-                <div class="flex justify-between items-start text-gray-400">
-                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Total Omzet Penjualan</span>
-                    <i class="fa-solid fa-wallet text-xl text-blue-600 bg-blue-50 p-2 rounded-lg"></i>
+        <!-- TAB 1: DASHBOARD (STATISTIK UTAMA) -->
+        <div id="content-dashboard" class="tab-content space-y-8">
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-5 rounded-xl shadow-xs border border-gray-200">
+                    <div class="flex justify-between items-start text-gray-400">
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Total Omzet Penjualan</span>
+                        <i class="fa-solid fa-wallet text-xl text-blue-600 bg-blue-50 p-2 rounded-lg"></i>
+                    </div>
+                    <p class="text-2xl font-black text-gray-900 mt-2">Rp 42.500.000</p>
+                    <span class="text-xs text-emerald-600 font-semibold mt-1 inline-block"><i class="fa-solid fa-arrow-trend-up"></i> +12% dibanding kemarin</span>
                 </div>
-                <p class="text-2xl font-black text-gray-900 mt-2">Rp 42.500.000</p>
-                <span class="text-xs text-emerald-600 font-semibold mt-1 inline-block"><i class="fa-solid fa-arrow-trend-up"></i> +12% dibanding kemarin</span>
-            </div>
-            <div class="bg-white p-5 rounded-xl shadow-xs border border-gray-200">
-                <div class="flex justify-between items-start text-gray-400">
-                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Tiket Terjual (Hari ini)</span>
-                    <i class="fa-solid fa-ticket text-xl text-emerald-600 bg-emerald-50 p-2 rounded-lg"></i>
+                <div class="bg-white p-5 rounded-xl shadow-xs border border-gray-200">
+                    <div class="flex justify-between items-start text-gray-400">
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Tiket Terjual (Hari ini)</span>
+                        <i class="fa-solid fa-ticket text-xl text-emerald-600 bg-emerald-50 p-2 rounded-lg"></i>
+                    </div>
+                    <p class="text-2xl font-black text-gray-900 mt-2">1,240 <span class="text-sm font-normal text-gray-400">Lembar</span></p>
+                    <span class="text-xs text-emerald-600 font-semibold mt-1 inline-block"><i class="fa-solid fa-arrow-trend-up"></i> +4.3% dr target harian</span>
                 </div>
-                <p class="text-2xl font-black text-gray-900 mt-2">1,240 <span class="text-sm font-normal text-gray-400">Lembar</span></p>
-                <span class="text-xs text-emerald-600 font-semibold mt-1 inline-block"><i class="fa-solid fa-arrow-trend-up"></i> +4.3% dr target harian</span>
-            </div>
-            <div class="bg-white p-5 rounded-xl shadow-xs border border-gray-200">
-                <div class="flex justify-between items-start text-gray-400">
-                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Mitra Jasa Aktif (EO)</span>
-                    <i class="fa-solid fa-handshake text-xl text-purple-600 bg-purple-50 p-2 rounded-lg"></i>
+                <div class="bg-white p-5 rounded-xl shadow-xs border border-gray-200">
+                    <div class="flex justify-between items-start text-gray-400">
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Mitra Jasa Aktif (EO)</span>
+                        <i class="fa-solid fa-handshake text-xl text-purple-600 bg-purple-50 p-2 rounded-lg"></i>
+                    </div>
+                    <p class="text-2xl font-black text-gray-900 mt-2">18 <span class="text-sm font-normal text-gray-400">Penyelenggara</span></p>
+                    <span class="text-xs text-gray-400 font-medium mt-1 inline-block">2 Event sedang menunggu persetujuan</span>
                 </div>
-                <p class="text-2xl font-black text-gray-900 mt-2">18 <span class="text-sm font-normal text-gray-400">Penyelenggara</span></p>
-                <span class="text-xs text-gray-400 font-medium mt-1 inline-block">2 Event sedang menunggu persetujuan</span>
+            </section>
+            
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm text-blue-800">
+                <i class="fa-solid fa-info-circle mr-2"></i> Silakan pilih menu di sidebar kiri untuk mengelola data operasional secara detail.
             </div>
-        </section>
+        </div>
 
-        <!-- TABEL KELOLA PENGAJUAN EVENT MITRA -->
-        <section class="bg-white rounded-xl shadow-xs border border-gray-200 overflow-hidden">
-            <div class="p-5 border-b border-gray-100 flex justify-between items-center">
-                <div>
-                    <h3 class="font-bold text-gray-900">Persetujuan Event Masuk (Mitra Baru)</h3>
-                    <p class="text-xs text-gray-500">Tinjau data pengajuan customer sebelum tiket resmi dijual secara online.</p>
+        <!-- TAB 2: PERSETUJUAN EVENT -->
+        <div id="content-persetujuan" class="tab-content hidden">
+            <section class="bg-white rounded-xl shadow-xs border border-gray-200 overflow-hidden">
+                <div class="p-5 border-b border-gray-100 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-gray-900">Persetujuan Event Masuk (Mitra Baru)</h3>
+                        <p class="text-xs text-gray-500">Tinjau data pengajuan customer sebelum tiket resmi dijual secara online.</p>
+                    </div>
+                    <span id="table-badge" class="bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full">2 Butuh Konfirmasi</span>
                 </div>
-                <span class="bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full">2 Butuh Konfirmasi</span>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-gray-50 text-xs uppercase text-gray-500 font-bold border-b border-gray-100">
+                            <tr>
+                                <th class="p-4">Nama Event</th>
+                                <th class="p-4">Penyelenggara (EO)</th>
+                                <th class="p-4">Tanggal Pelaksanaan</th>
+                                <th class="p-4">Harga / Kuota</th>
+                                <th class="p-4 text-center">Aksi Operasional</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50/80 transition-colors">
+                                <td class="p-4 font-bold text-gray-900">Rock In Celebes 2026</td>
+                                <td class="p-4 text-gray-600">PT. Nada Promosindo</td>
+                                <td class="p-4 text-gray-600">12 Oktober 2026</td>
+                                <td class="p-4">
+                                    <span class="block font-semibold text-gray-900">Rp 250.000</span>
+                                    <span class="text-xs text-gray-400">Kuota: 5,000 Pcs</span>
+                                </td>
+                                <td class="p-4 flex gap-2 justify-center">
+                                    <button onclick="approveEvent(this)" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer"><i class="fa-solid fa-check mr-1"></i> Terima & Publish</button>
+                                    <button onclick="rejectEvent(this)" class="bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer">Tolak</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/80 transition-colors">
+                                <td class="p-4 font-bold text-gray-900">Stand Up Comedy Special: Sunyi</td>
+                                <td class="p-4 text-gray-600">Komunitas Tawa ID</td>
+                                <td class="p-4 text-gray-600">05 September 2026</td>
+                                <td class="p-4">
+                                    <span class="block font-semibold text-gray-900">Rp 100.000</span>
+                                    <span class="text-xs text-gray-400">Kuota: 350 Pcs</span>
+                                </td>
+                                <td class="p-4 flex gap-2 justify-center">
+                                    <button onclick="approveEvent(this)" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer"><i class="fa-solid fa-check mr-1"></i> Terima & Publish</button>
+                                    <button onclick="rejectEvent(this)" class="bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer">Tolak</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- TAB 3: TIKET TERJUAL -->
+        <div id="content-tiket" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-xs">
+                <h3 class="font-bold text-gray-900 mb-2">Riwayat Transaksi Tiket Terjual</h3>
+                <p class="text-xs text-gray-500 mb-4">Daftar pesanan tiket online yang telah sukses dibayar oleh pembeli.</p>
+                <div class="bg-gray-50 p-8 text-center rounded-lg border border-dashed border-gray-200">
+                    <i class="fa-solid fa-receipt text-3xl text-gray-300 mb-2"></i>
+                    <p class="text-sm font-medium text-gray-600">Belum ada riwayat transaksi baru untuk hari ini.</p>
+                </div>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
-                    <thead class="bg-gray-50 text-xs uppercase text-gray-500 font-bold border-b border-gray-100">
-                        <tr>
-                            <th class="p-4">Nama Event</th>
-                            <th class="p-4">Penyelenggara (EO)</th>
-                            <th class="p-4">Tanggal Pelaksanaan</th>
-                            <th class="p-4">Harga / Kuota</th>
-                            <th class="p-4 text-center">Aksi Operasional</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100">
-                        <!-- Item 1 -->
-                        <tr class="hover:bg-gray-50/80 transition-colors">
-                            <td class="p-4 font-bold text-gray-900">Rock In Celebes 2026</td>
-                            <td class="p-4 text-gray-600">PT. Nada Promosindo</td>
-                            <td class="p-4 text-gray-600">12 Oktober 2026</td>
-                            <td class="p-4">
-                                <span class="block font-semibold text-gray-900">Rp 250.000</span>
-                                <span class="text-xs text-gray-400">Kuota: 5,000 Pcs</span>
-                            </td>
-                            <td class="p-4 flex gap-2 justify-center">
-                                <button class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer"><i class="fa-solid fa-check mr-1"></i> Terima & Publish</button>
-                                <button class="bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer">Tolak</button>
-                            </td>
-                        </tr>
-                        <!-- Item 2 -->
-                        <tr class="hover:bg-gray-50/80 transition-colors">
-                            <td class="p-4 font-bold text-gray-900">Stand Up Comedy Special: Sunyi</td>
-                            <td class="p-4 text-gray-600">Komunitas Tawa ID</td>
-                            <td class="p-4 text-gray-600">05 September 2026</td>
-                            <td class="p-4">
-                                <span class="block font-semibold text-gray-900">Rp 100.000</span>
-                                <span class="text-xs text-gray-400">Kuota: 350 Pcs</span>
-                            </td>
-                            <td class="p-4 flex gap-2 justify-center">
-                                <button class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer"><i class="fa-solid fa-check mr-1"></i> Terima & Publish</button>
-                                <button class="bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer">Tolak</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        </div>
+
+        <!-- TAB 4: DATA CUSTOMER -->
+        <div id="content-customer" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-xs">
+                <h3 class="font-bold text-gray-900 mb-2">Database Akun Pembeli & Mitra</h3>
+                <p class="text-xs text-gray-500 mb-4">Manajemen akun pengguna yang terdaftar di platform Blockpass.</p>
+                <div class="bg-gray-50 p-8 text-center rounded-lg border border-dashed border-gray-200">
+                    <i class="fa-solid fa-users-gear text-3xl text-gray-300 mb-2"></i>
+                    <p class="text-sm font-medium text-gray-600">Database kosong atau sedang dalam pemeliharaan.</p>
+                </div>
             </div>
-        </section>
+        </div>
+
     </main>
-<!-- ======================= LOGIK INTERAKTIF DASHBOARD ADMIN ======================= -->
+
+    <!-- ======================= INTERACTIVE SCRIPT (JAVASCRIPT) ======================= -->
     <script>
-        // Fungsi untuk menyetujui event (Terima)
-        document.querySelectorAll('button.bg-emerald-600').forEach(button => {
-            button.addEventListener('click', function() {
-                // Cari baris tabel (tr) tempat tombol ini berada
-                const row = this.closest('tr');
-                const namaEvent = row.querySelector('td:first-child').innerText;
-                
-                // Efek visual sukses
-                alert(`Sukses! Event "${namaEvent}" telah disetujui dan resmi live di halaman utama.`);
-                row.remove(); // Hapus baris dari tabel persetujuan
-                
-                // Update counter notifikasi (opsional/dummy)
+        // 1. FUNGSI UNTUK PINDAH TAB MENU SIDEBAR
+        function switchTab(tabId, element) {
+            // Sembunyikan semua konten tab terlebih dahulu
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Tampilkan konten tab yang dipilih
+            document.getElementById('content-' + tabId).classList.remove('hidden');
+            
+            // Atur ulang gaya tombol di sidebar (matikan status aktif lama)
+            document.querySelectorAll('.target-menu').forEach(btn => {
+                btn.className = "w-full flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg text-sm font-medium transition-colors cursor-pointer text-left target-menu";
+            });
+            
+            // Nyalakan status aktif di tombol yang baru diklik
+            element.className = "w-full flex items-center gap-3 px-3 py-2.5 bg-blue-600 rounded-lg text-white text-sm font-semibold transition-colors cursor-pointer text-left target-menu";
+
+            // Mengubah judul header dinamis sesuai tab
+            const titles = {
+                'dashboard': 'Selamat Datang Kembali, Bos!',
+                'persetujuan': 'Persetujuan Event Mitra',
+                'tiket': 'Laporan Tiket Terjual',
+                'customer': 'Manajemen Customer & Akun'
+            };
+            const descs = {
+                'dashboard': 'Berikut adalah rangkuman performa platform tiket online lu hari ini.',
+                'persetujuan': 'Otorisasi pengajuan event masuk dari EO rekanan sebelum dipublish ke publik.',
+                'tiket': 'Pantau data transaksi masuk, manifest tiket, dan laporan finansial.',
+                'customer': 'Lihat daftar pembeli tiket aktif dan manajemen kemitraan promotor.'
+            };
+            
+            document.getElementById('header-title').innerText = titles[tabId];
+            document.getElementById('header-desc').innerText = descs[tabId];
+        }
+
+        // 2. LOGIKA TOMBOL APPROVE (TERIMA & PUBLISH)
+        function approveEvent(button) {
+            const row = button.closest('tr');
+            const namaEvent = row.querySelector('td:first-child').innerText;
+            alert(`Sukses! Event "${namaEvent}" telah disetujui dan resmi live.`);
+            row.remove();
+            updateCounter();
+        }
+
+        // 3. LOGIKA TOMBOL REJECT (TOLAK)
+        function rejectEvent(button) {
+            const row = button.closest('tr');
+            const namaEvent = row.querySelector('td:first-child').innerText;
+            if (confirm(`Apakah lu yakin ingin MENOLAK event "${namaEvent}"?`)) {
+                row.remove();
                 updateCounter();
-            });
-        });
+            }
+        }
 
-        // Fungsi untuk menolak event
-        document.querySelectorAll('button.bg-red-50').forEach(button => {
-            button.addEventListener('click', function() {
-                const row = this.closest('tr');
-                const namaEvent = row.querySelector('td:first-child').innerText;
-                
-                if (confirm(`Apakah lu yakin ingin MENOLAK event "${namaEvent}"?`)) {
-                    row.remove();
-                    updateCounter();
-                }
-            });
-        });
-
-        // Fungsi sederhana untuk update angka counter "Butuh Konfirmasi"
+        // 4. UPDATE ANGKA NOTIFIKASI SECARA REALTIME
         function updateCounter() {
             const remainingEvents = document.querySelectorAll('tbody tr').length;
-            const badge = document.querySelector('.bg-orange-100');
-            const sidebarBadge = document.querySelector('.bg-orange-500');
+            const badge = document.getElementById('table-badge');
+            const sidebarBadge = document.getElementById('sidebar-badge');
             
             if (remainingEvents === 0) {
-                if(badge) badge.innerText = "Semua Beres!";
-                if(badge) badge.className = "bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full";
+                if(badge) {
+                    badge.innerText = "Semua Beres!";
+                    badge.className = "bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full";
+                }
                 if(sidebarBadge) sidebarBadge.remove();
             } else {
                 if(badge) badge.innerText = `${remainingEvents} Butuh Konfirmasi`;
