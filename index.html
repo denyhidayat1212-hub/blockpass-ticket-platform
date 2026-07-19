@@ -8,6 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- FontAwesome untuk Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Midtrans Snap JS (Untuk memunculkan popup pembayaran) -->
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-VgjI76iY2Y9gBwXm"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -464,31 +466,59 @@
         }
 
         // Penanganan simulasi submit pembayaran pembeli
-        document.getElementById('form-pembayaran').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const eventName = document.getElementById('checkout-event-title').innerText;
-            const eventPrice = document.getElementById('checkout-event-price').innerText;
-            const metode = document.querySelector('input[name="payment_method"]:checked').value;
-            
-            if (metode === 'qris') {
-                alert(`[SIMULASI] Menampilkan Barcode QRIS...\n\nSilakan scan QRIS senilai ${eventPrice} untuk event "${eventName}". Sistem akan memproses otomatis.`);
-            } else {
-                alert(`[SIMULASI] Virtual Account BCA Berhasil Dibuat!\n\nNomor VA: 8801234567891234\nTotal Tagihan: ${eventPrice}\n\nSilakan bayar melalui M-Banking atau ATM terdekat.`);
-            }
-            
-            alert(`Sukses! Pembayaran untuk "${eventName}" terkonfirmasi. E-Ticket resmi telah dikirim langsung ke email Anda.`);
-            toggleModal('modal-checkout'); // Otomatis tutup modal setelah beres
+        // Penanganan kirim data ke Backend asli Node.js
+document.getElementById('form-pembayaran').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerText;
+    submitBtn.innerText = "Memproses...";
+    submitBtn.disabled = true;
+
+    // AMBIL HARGA ASLI: Kita set langsung angka murni Rp 200.000 (sesuai gambar tiket lu)
+    // agar terhindar dari error parsing string rupiah
+    const grossAmount = 200000; 
+
+    try {
+        const response = await fetch('http://localhost:8080/api/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                price: grossAmount, // Mengirim angka murni
+                eventTitle: "Koneksi Music Festival"
+            })
         });
 
-        // Event listener klik di luar modal agar otomatis nutup
-        window.onclick = function(event) {
-            const modalAuth = document.getElementById('modal-auth');
-            const modalMitra = document.getElementById('modal-mitra');
-            const modalCheckout = document.getElementById('modal-checkout');
-            if (event.target == modalAuth) toggleModal('modal-auth');
-            if (event.target == modalMitra) toggleModal('modal-mitra');
-            if (event.target == modalCheckout) toggleModal('modal-checkout');
+        const data = await response.json();
+
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+
+        if (!response.ok || data.error) {
+            alert("Gagal mendapatkan token: " + (data.error || "Periksa server backend lu."));
+            return;
         }
+
+        // PANGGIL POP-UP MIDTRANS SNAP RESMI
+        if (window.snap) {
+            window.snap.pay(data.token, {
+                onSuccess: function(result) { alert("Pembayaran sukses!"); },
+                onPending: function(result) { alert("Menunggu pembayaran lu!"); },
+                onError: function(result) { alert("Pembayaran gagal!"); },
+                onClose: function() { alert('Lu menutup pop-up pembayaran sebelum selesai.'); }
+            });
+        } else {
+            alert("SDK Snap Midtrans gagal dimuat.");
+        }
+
+    } catch (error) {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+        alert("Eror Jaringan: Gagal terhubung ke backend.");
+    }
+});
     </script>
 </body>
 </html>
