@@ -545,5 +545,18 @@ document.getElementById('form-pembayaran').addEventListener('submit', async func
     }
 });
     </script>
+
+    <script>
+        const slider = document.querySelector('.overflow-x-auto');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        nextBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: slider.offsetWidth, behavior: 'smooth' });
+        });
+        prevBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: -slider.offsetWidth, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
