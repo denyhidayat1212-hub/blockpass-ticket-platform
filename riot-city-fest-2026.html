@@ -210,6 +210,112 @@
 
     <!-- 3. JAVASCRIPT HITUNG TOTAL TIKET OTOMATIS -->
     <script>
+         function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                }, 20);
+            } else {
+                modal.classList.add('opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Fungsi khusus membuka modal checkout & mengisi data dinamis tiket
+        function openCheckout(title, price) {
+            document.getElementById('checkout-event-title').innerText = title;
+            document.getElementById('checkout-event-price').innerText = price;
+            toggleModal('modal-checkout');
+        }
+
+        // Fungsi geser sidebar panel admin
+        function toggleSidebar(sidebarId) {
+            const sidebar = document.getElementById(sidebarId);
+            if (sidebar.classList.contains('translate-x-full')) {
+                sidebar.classList.remove('translate-x-full');
+            } else {
+                sidebar.classList.add('translate-x-full');
+            }
+        }
+
+        // Penanganan simulasi submit pembayaran pembeli
+        // Penanganan kirim data ke Backend asli Node.js
+document.getElementById('form-pembayaran').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerText;
+    submitBtn.innerText = "Memproses...";
+    submitBtn.disabled = true;
+
+    // AMBIL HARGA ASLI: Kita set langsung angka murni Rp 200.000 (sesuai gambar tiket lu)
+    // agar terhindar dari error parsing string rupiah
+    const grossAmount = 200000; 
+
+    try {
+        const response = await fetch('http://localhost:8080/api/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                price: grossAmount, // Mengirim angka murni
+                eventTitle: "Koneksi Music Festival"
+            })
+        });
+
+        const data = await response.json();
+
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+
+        if (!response.ok || data.error) {
+            alert("Gagal mendapatkan token: " + (data.error || "Periksa server backend lu."));
+            return;
+        }
+
+        // PANGGIL POP-UP MIDTRANS SNAP RESMI
+        if (window.snap) {
+            window.snap.pay(data.token, {
+                onSuccess: function(result) { alert("Pembayaran sukses!"); },
+                onPending: function(result) { alert("Menunggu pembayaran lu!"); },
+                onError: function(result) { alert("Pembayaran gagal!"); },
+                onClose: function() { alert('Lu menutup pop-up pembayaran sebelum selesai.'); }
+            });
+        } else {
+            alert("SDK Snap Midtrans gagal dimuat.");
+        }
+
+    } catch (error) {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+        alert("Eror Jaringan: Gagal terhubung ke backend.");
+    }
+});
+    </script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('sliderContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    if (slider && prevBtn && nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        slider.scrollLeft += slider.clientWidth;
+      });
+
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        slider.scrollLeft -= slider.clientWidth;
+      });
+    }
+  });
         document.addEventListener('DOMContentLoaded', () => {
             const ticketPrice = 35000;
             let qty = 0;
