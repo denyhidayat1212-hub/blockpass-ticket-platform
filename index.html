@@ -84,7 +84,7 @@
         <section class="relative bg-black rounded-2xl overflow-hidden group">
         
         <!-- Container Slider -->
-            <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-none scroll-smooth">
+            <div id="sliderContainer" class="flex overflow-x-auto snap-x snap-mandatory scrollbar-none scroll-smooth">
 
             <!-- Slide 1 -->
                 <div class="w-full flex-shrink-0 sanap-center relative">
@@ -547,16 +547,19 @@ document.getElementById('form-pembayaran').addEventListener('submit', async func
     </script>
 
     <script>
-        const slider = document.querySelector('.overflow-x-auto');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
+  const slider = document.getElementById('sliderContainer');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
 
-        nextBtn.addEventListener('click', () => {
-            slider.scrollBy({ left: slider.offsetWidth, behavior: 'smooth' });
-        });
-        prevBtn.addEventListener('click', () => {
-            slider.scrollBy({ left: -slider.offsetWidth, behavior: 'smooth' });
-        });
-    </script>
+  if (slider && prevBtn && nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' });
+    });
+
+    prevBtn.addEventListener('click', () => {
+      slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' });
+    });
+  }
+</script>
 </body>
 </html>
