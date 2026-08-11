@@ -74,30 +74,23 @@
                     </svg>
                 </a>
             </div>
-
-            <!-- Search Bar -->
-            <div class="flex-1 max-w-xl relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" placeholder="Cari event konser, atau festival..." 
-                       class="w-full pl-11 pr-4 py-2 bg-gray-100 border border-transparent rounded-full focus:outline-none focus:bg-white focus:border-blue-500 transition-all text-sm">
+                
+                <div class="flex-1 max-w-lg hidden sm:block">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                        <input type="text" id="searchInput" placeholder="Cari event konser, atau festival..." class="w-full bg-gray-100 text-gray-800 pl-10 pr-4 py-2 rounded-full text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    </div>
+                </div>
             </div>
 
-            <!-- Right Menu / Actions -->
-            <div class="flex items-center gap-5 text-sm font-medium text-gray-700">
-                <!-- FITUR 1: Mempermudah Mitra Buat Event -->
-                <button onclick="toggleModal('modal-mitra')" class="hidden lg:block text-blue-600 hover:text-blue-800 font-semibold cursor-pointer">
-                    <i class="fa-solid fa-plus-circle mr-1"></i> Buat Event & Bermitra
-                </button>
-                
-                <!-- FITUR 2: Akses Cepat Kelola Event Lu (Admin) -->
-                <a href="admin.html" class="text-gray-600 hover:text-gray-900 font-medium cursor-pointer flex items-center">
-                    <i class="fa-solid fa-sliders mr-1"></i> Panel Admin
+            <!-- Right Actions -->
+            <div class="flex items-center gap-3 md:gap-5">
+                <a href="#" class="hidden md:flex items-center gap-1.5 text-xs md:text-sm font-bold text-blue-600 hover:text-blue-700">
+                    <i class="fa-solid fa-circle-plus"></i> Buat Event & Bermitra
                 </a>
-
-                <!-- FITUR 3: Registrasi / Login Pembeli Tiket Mudah -->
-                <button onclick="toggleModal('modal-auth')" class="flex items-center gap-2 bg-blue-950 text-white px-5 py-2 rounded-full hover:bg-blue-900 transition-colors shadow-sm font-semibold cursor-pointer">
-                    <i class="fa-regular fa-user-circle text-lg"></i> Masuk / Daftar
-                </button>
+                <a href="#" class="bg-[#1e293b] hover:bg-slate-800 text-white font-bold px-5 py-2 rounded-full text-xs md:text-sm transition">
+                    <i class="fa-regular fa-user mr-1.5"></i> Masuk / Daftar
+                </a>
             </div>
         </div>
     </header>
