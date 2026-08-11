@@ -135,7 +135,7 @@
                         <span><i class="fa-solid fa-location-dot"></i> 53 Club, Karawang</span>
                     </div>
                 </div>
-
+                // category 1
                 <div class="py-5 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <span class="text-blue-600 font-bold text-sm">Early Bird</span>
@@ -150,6 +150,13 @@
                     </div>
                 </div>
 
+                <div class="pt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <p class="text-xs text-gray-500">Total</p>
+                        <p class="text-xl font-extrabold text-gray-900" id="totalPriceText">Rp. 0</p>
+                    </div>
+
+                // category 2
                 <div class="py-5 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <span class="text-blue-600 font-bold text-sm">Presale</span>
@@ -158,16 +165,16 @@
                     </div>
 
                     <div class="flex items-center gap-3">
-                        <button id="btnMinus" class="w-8 h-8 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold flex items-center justify-center transition">-</button>
-                        <span id="ticketQty" class="w-8 text-center font-bold text-gray-800 text-sm">0</span>
-                        <button id="btnPlus" class="w-8 h-8 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center justify-center transition">+</button>
+                        <button id="btnMinus2" class="w-8 h-8 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold flex items-center justify-center transition">-</button>
+                        <span id="ticketQty2" class="w-8 text-center font-bold text-gray-800 text-sm">0</span>
+                        <button id="btnPlus2" class="w-8 h-8 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center justify-center transition">+</button>
                     </div>
                 </div>
 
                 <div class="pt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <p class="text-xs text-gray-500">Total</p>
-                        <p class="text-xl font-extrabold text-gray-900" id="totalPriceText">Rp. 0</p>
+                        <p class="text-xl font-extrabold text-gray-900" id="totalPriceText2">Rp. 0</p>
                     </div>
                     
                     <button id="btnPesan" disabled class="bg-gray-300 text-gray-500 font-bold px-8 py-2.5 rounded-xl text-sm transition cursor-not-allowed">
@@ -321,13 +328,13 @@
             const btnPesan = document.getElementById('btnPesan');
 
             // catergory 2
-            const ticketPrice = 50000;
-            let qty = 0;
+            const ticketPrice2 = 50000;
+            let qty2 = 0;
 
-            const qtyEl = document.getElementById('ticketQty');
-            const totalEl = document.getElementById('totalPriceText');
-            const btnMinus = document.getElementById('btnMinus');
-            const btnPlus = document.getElementById('btnPlus');
+            const qtyEl2 = document.getElementById('ticketQty2');
+            const totalEl2 = document.getElementById('totalPriceText2');
+            const btnMinus2 = document.getElementById('btnMinus2');
+            const btnPlus2 = document.getElementById('btnPlus2');
 
             // Modal Form
             const modalForm = document.getElementById('modalForm');
