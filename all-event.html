@@ -20,80 +20,33 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
+<body class="bg-gray-50 text-gray-800 antialiased font-sans">
 
-    <!-- 1. NAVBAR -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+    <!-- 1. NAVBAR (Sudah Diperbaiki) -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
             
-            <!-- Logo & Kategori -->
+            <!-- Logo Brand -->
             <div class="flex items-center gap-6">
-                <a href="index.html" class="h-9 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="100%" height="100%">
-  <defs>
-    <linearGradient id="bpGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3B82F6" />
-      <stop offset="100%" stop-color="#1E40AF" />
-    </linearGradient>
-  </defs>
-
-  <!-- ICON -->
-  <g transform="translate(15, 15)">
-    <!-- Back Card / Layer -->
-    <rect x="18" y="5" width="45" height="55" rx="10" fill="#FBBF24" transform="rotate(12 40 30)" />
-    <!-- Front Card -->
-    <rect x="5" y="10" width="50" height="50" rx="12" fill="url(#bpGrad2)" />
-    <!-- Ticket Holes -->
-    <circle cx="5" cy="35" r="5" fill="#FFFFFF" />
-    <circle cx="55" cy="35" r="5" fill="#FFFFFF" />
-    <!-- QR Code / Chip Pattern -->
-    <rect x="21" y="24" width="18" height="18" rx="4" fill="#FFFFFF" opacity="0.9" />
-    <rect x="26" y="29" width="8" height="8" rx="1" fill="#1E40AF" />
-  </g>
-
-  <!-- TEKS BRAND -->
-  <text x="95" y="58" font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="800" font-size="34" fill="#1E293B">
-    BLOCK<tspan fill="#3B82F6">PASS</tspan>
-  </text>
-  <text x="96" y="74" font-family="sans-serif" font-weight="600" font-size="10" fill="#64748B" letter-spacing="3">TICKET PLATFORM</text>
-</svg>
-
-                      <defs>
-                        <linearGradient id="blockpassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stop-color="#4F46E5" />
-                          <stop offset="100%" stop-color="#06B6D4" />
-                        </linearGradient>
-                      </defs>
-                      <g transform="translate(10, 10)">
-                        <rect x="5" y="5" width="55" height="70" rx="12" fill="url(#blockpassGrad)" opacity="0.15" />
-                        <path d="M15 15 C15 9.47715 19.4772 5 25 5 H50 C55.5228 5 60 9.47715 60 15 V32 C56 32 53 35 53 40 C53 45 56 48 60 48 V65 C60 70.5228 55.5228 75 50 75 H25 C19.4772 75 15 70.5228 15 65 V15 Z" fill="url(#blockpassGrad)" />
-                        <path d="M32 25 H45 C47.5 25 49 26.5 49 29 C49 31.5 47.5 33 45 33 H32 V25 Z" fill="#FFFFFF" />
-                        <path d="M32 41 H43 C45.5 41 47 42.5 47 45 C47 47.5 45.5 49 43 49 H32 V41 Z" fill="#FFFFFF" />
-                        <circle cx="25" cy="40" r="3" fill="#FFFFFF" opacity="0.8" />
-                      </g>
-                    </svg>
+                <a href="index.html" class="flex items-center gap-2 text-xl font-black tracking-wider text-blue-700">
+                    <span class="bg-blue-600 text-white px-2 py-0.5 rounded-lg text-sm font-bold">BP</span> BLOCKPASS
                 </a>
             </div>
 
-            <!-- Search Bar -->
-            <div class="flex-1 max-w-xl relative">
+            <!-- Search Bar (Sudah Diberi ID searchInput) -->
+            <div class="flex-1 max-w-xl relative hidden sm:block">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" placeholder="Cari event konser, atau festival..." 
+                <input type="text" id="searchInput" placeholder="Cari event konser, atau festival..." 
                        class="w-full pl-11 pr-4 py-2 bg-gray-100 border border-transparent rounded-full focus:outline-none focus:bg-white focus:border-blue-500 transition-all text-sm">
             </div>
 
             <!-- Right Menu / Actions -->
-            <div class="flex items-center gap-5 text-sm font-medium text-gray-700">
-                <!-- FITUR 1: Mempermudah Mitra Buat Event -->
-                <button onclick="toggleModal('modal-mitra')" class="hidden lg:block text-blue-600 hover:text-blue-800 font-semibold cursor-pointer">
+            <div class="flex items-center gap-3 md:gap-5 text-sm font-medium text-gray-700">
+                <button class="hidden lg:block text-blue-600 hover:text-blue-800 font-semibold cursor-pointer text-xs md:text-sm">
                     <i class="fa-solid fa-plus-circle mr-1"></i> Buat Event & Bermitra
                 </button>
-                
-                </a>
-
-                <!-- FITUR 2: Registrasi / Login Pembeli Tiket Mudah -->
-                <button onclick="toggleModal('modal-auth')" class="flex items-center gap-2 bg-blue-950 text-white px-5 py-2 rounded-full hover:bg-blue-900 transition-colors shadow-sm font-semibold cursor-pointer">
-                    <i class="fa-regular fa-user-circle text-lg"></i> Masuk / Daftar
+                <button class="flex items-center gap-2 bg-[#1e293b] text-white px-5 py-2 rounded-full hover:bg-slate-800 transition-colors shadow-sm font-semibold cursor-pointer text-xs md:text-sm">
+                    <i class="fa-regular fa-user-circle text-base"></i> Masuk / Daftar
                 </button>
             </div>
         </div>
@@ -114,7 +67,7 @@
             <!-- SORT & RESULTS COUNTER -->
             <div class="flex items-center gap-3">
                 <span class="text-xs text-gray-500 whitespace-nowrap">Urutkan:</span>
-                <select id="sortSelect" class="bg-white border border-gray-300 text-gray-700 text-xs font-semibold rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="sortSelect" class="bg-white border border-gray-300 text-gray-700 text-xs font-semibold rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
                     <option value="popular">Paling Populer</option>
                     <option value="nearest">Tanggal Terdekat</option>
                     <option value="price-low">Harga Terendah</option>
@@ -142,12 +95,12 @@
             </button>
         </div>
 
-        <!-- GRID DENGAN 4 KOLOM (Presisi sesuai desain screenshot) -->
+        <!-- GRID DENGAN 4 KOLOM -->
         <div id="eventGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             <!-- Cards akan di-generate otomatis oleh JS -->
         </div>
 
-        <!-- EMPTY STATE (Tampil jika pencarian tidak ditemukan) -->
+        <!-- EMPTY STATE -->
         <div id="emptyState" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-gray-300 p-8">
             <div class="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
                 <i class="fa-solid fa-calendar-xmark"></i>
@@ -158,220 +111,214 @@
 
     </main>
 
-    <!-- JAVASCRIPT & DATA DATABASE -->
+    <!-- JAVASCRIPT -->
     <script>
-        // Data Event yang disesuaikan persis dengan Banner & Data dari screenshot-mu
-        const eventsData = [
-            {
-                id: 1,
-                title: 'Riot City Fest "ANGRY SHOW" 2026',
-                category: 'Musik',
-                location: 'Karawang',
-                price: 35000,
-                priceFormatted: 'Rp 35.000',
-                status: 'Sold Out',
-                statusClass: 'text-gray-500 font-bold',
-                bannerTag: 'ANGRY SHOW',
-                bannerUrl: 'https://i.ibb.co.com/0RVJmVW0/BANNER-ANGRY-SHOW-21-X9.png',
-                link: 'riot-city-fest.html',
-                popularity: 100
-            },
-            {
-                id: 2,
-                title: 'Joyland Sessions Jakarta - Special Edition',
-                category: 'Festival',
-                location: 'Jakarta Pusat',
-                price: 450000,
-                priceFormatted: 'Rp 450.000',
-                status: 'Tiket Tersedia',
-                statusClass: 'text-emerald-600 font-bold',
-                bannerTag: 'Joyland Sessions',
-                bannerUrl: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80',
-                link: '#',
-                popularity: 90
-            },
-            {
-                id: 3,
-                title: 'Koneksi Music Festival with Simpati 5G',
-                category: 'Festival',
-                location: 'Jakarta Selatan',
-                price: 200000,
-                priceFormatted: 'Rp 200.000',
-                status: 'Tiket Tersedia',
-                statusClass: 'text-emerald-600 font-bold',
-                bannerTag: 'Koneksi 5G Festival',
-                bannerUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80',
-                link: '#',
-                popularity: 85
-            },
-            {
-                id: 4,
-                title: 'Project Pop 30 Tahun: Forever Young Fun',
-                category: 'Musik',
-                location: 'Jakarta Pusat',
-                price: 200000,
-                priceFormatted: 'Rp 200.000',
-                status: 'Tiket Tersedia',
-                statusClass: 'text-emerald-600 font-bold',
-                bannerTag: 'Project Pop 30th',
-                bannerUrl: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=600&q=80',
-                link: '#',
-                popularity: 80
-            },
-            {
-                id: 5,
-                title: 'Pestapora Festival 2026',
-                category: 'Festival',
-                location: 'Jakarta',
-                price: 175000,
-                priceFormatted: 'Rp 175.000',
-                status: 'Tiket Tersedia',
-                statusClass: 'text-emerald-600 font-bold',
-                bannerTag: 'Pestapora 2026',
-                bannerUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
-                link: '#',
-                popularity: 95
-            },
-            {
-                id: 6,
-                title: 'Purple Night EDM & Techno Party',
-                category: 'Nightlife',
-                location: 'Karawang',
-                price: 50000,
-                priceFormatted: 'Rp 50.000',
-                status: 'Tiket Tersedia',
-                statusClass: 'text-emerald-600 font-bold',
-                bannerTag: 'Purple Night',
-                bannerUrl: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=600&q=80',
-                link: '#',
-                popularity: 75
-            },
-            {
-                id: 7,
-                title: 'Persib vs Persija Super Match',
-                category: 'Olahraga',
-                location: 'Bandung',
-                price: 125000,
-                priceFormatted: 'Rp 125.000',
-                status: 'Tiket Tersedia',
-                statusClass: 'text-emerald-600 font-bold',
-                bannerTag: 'Super Match',
-                bannerUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80',
-                link: '#',
-                popularity: 88
-            },
-            {
-                id: 8,
-                title: 'Kanan Kiri Art & Music Fest',
-                category: 'Festival',
-                location: 'Bekasi',
-                price: 85000,
-                priceFormatted: 'Rp 85.000',
-                status: 'Tiket Tersedia',
-                statusClass: 'text-emerald-600 font-bold',
-                bannerTag: 'Kanan Kiri Fest',
-                bannerUrl: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=600&q=80',
-                link: '#',
-                popularity: 70
-            }
-        ];
+        document.addEventListener("DOMContentLoaded", function () {
+            const eventsData = [
+                {
+                    id: 1,
+                    title: 'Riot City Fest "ANGRY SHOW" 2026',
+                    category: 'Musik',
+                    location: 'Karawang',
+                    price: 35000,
+                    priceFormatted: 'Rp 35.000',
+                    status: 'Sold Out',
+                    statusClass: 'text-gray-500 font-bold',
+                    bannerTag: 'ANGRY SHOW',
+                    bannerUrl: 'https://i.ibb.co.com/0RVJmVW0/BANNER-ANGRY-SHOW-21-X9.png',
+                    link: 'riot-city-fest.html',
+                    popularity: 100
+                },
+                {
+                    id: 2,
+                    title: 'Joyland Sessions Jakarta - Special Edition',
+                    category: 'Festival',
+                    location: 'Jakarta Pusat',
+                    price: 450000,
+                    priceFormatted: 'Rp 450.000',
+                    status: 'Tiket Tersedia',
+                    statusClass: 'text-emerald-600 font-bold',
+                    bannerTag: 'Joyland Sessions',
+                    bannerUrl: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80',
+                    link: '#',
+                    popularity: 90
+                },
+                {
+                    id: 3,
+                    title: 'Koneksi Music Festival with Simpati 5G',
+                    category: 'Festival',
+                    location: 'Jakarta Selatan',
+                    price: 200000,
+                    priceFormatted: 'Rp 200.000',
+                    status: 'Tiket Tersedia',
+                    statusClass: 'text-emerald-600 font-bold',
+                    bannerTag: 'Koneksi 5G Festival',
+                    bannerUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80',
+                    link: '#',
+                    popularity: 85
+                },
+                {
+                    id: 4,
+                    title: 'Project Pop 30 Tahun: Forever Young Fun',
+                    category: 'Musik',
+                    location: 'Jakarta Pusat',
+                    price: 200000,
+                    priceFormatted: 'Rp 200.000',
+                    status: 'Tiket Tersedia',
+                    statusClass: 'text-emerald-600 font-bold',
+                    bannerTag: 'Project Pop 30th',
+                    bannerUrl: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=600&q=80',
+                    link: '#',
+                    popularity: 80
+                },
+                {
+                    id: 5,
+                    title: 'Pestapora Festival 2026',
+                    category: 'Festival',
+                    location: 'Jakarta',
+                    price: 175000,
+                    priceFormatted: 'Rp 175.000',
+                    status: 'Tiket Tersedia',
+                    statusClass: 'text-emerald-600 font-bold',
+                    bannerTag: 'Pestapora 2026',
+                    bannerUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
+                    link: '#',
+                    popularity: 95
+                },
+                {
+                    id: 6,
+                    title: 'Purple Night EDM & Techno Party',
+                    category: 'Nightlife',
+                    location: 'Karawang',
+                    price: 50000,
+                    priceFormatted: 'Rp 50.000',
+                    status: 'Tiket Tersedia',
+                    statusClass: 'text-emerald-600 font-bold',
+                    bannerTag: 'Purple Night',
+                    bannerUrl: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=600&q=80',
+                    link: '#',
+                    popularity: 75
+                },
+                {
+                    id: 7,
+                    title: 'Persib vs Persija Super Match',
+                    category: 'Olahraga',
+                    location: 'Bandung',
+                    price: 125000,
+                    priceFormatted: 'Rp 125.000',
+                    status: 'Tiket Tersedia',
+                    statusClass: 'text-emerald-600 font-bold',
+                    bannerTag: 'Super Match',
+                    bannerUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80',
+                    link: '#',
+                    popularity: 88
+                },
+                {
+                    id: 8,
+                    title: 'Kanan Kiri Art & Music Fest',
+                    category: 'Festival',
+                    location: 'Bekasi',
+                    price: 85000,
+                    priceFormatted: 'Rp 85.000',
+                    status: 'Tiket Tersedia',
+                    statusClass: 'text-emerald-600 font-bold',
+                    bannerTag: 'Kanan Kiri Fest',
+                    bannerUrl: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=600&q=80',
+                    link: '#',
+                    popularity: 70
+                }
+            ];
 
-        let currentCategory = 'all';
-        const eventGrid = document.getElementById('eventGrid');
-        const emptyState = document.getElementById('emptyState');
-        const searchInput = document.getElementById('searchInput');
-        const sortSelect = document.getElementById('sortSelect');
-        const catBtns = document.querySelectorAll('.cat-btn');
+            let currentCategory = 'all';
+            const eventGrid = document.getElementById('eventGrid');
+            const emptyState = document.getElementById('emptyState');
+            const searchInput = document.getElementById('searchInput');
+            const sortSelect = document.getElementById('sortSelect');
+            const catBtns = document.querySelectorAll('.cat-btn');
 
-        // Function Render Card Sesuai Layout Screenshot
-        function renderEvents(data) {
-            eventGrid.innerHTML = '';
+            function renderEvents(data) {
+                if (!eventGrid) return;
+                eventGrid.innerHTML = '';
 
-            if (data.length === 0) {
-                emptyState.classList.remove('hidden');
-                return;
-            } else {
-                emptyState.classList.add('hidden');
-            }
+                if (data.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    return;
+                } else {
+                    emptyState.classList.add('hidden');
+                }
 
-            data.forEach(item => {
-                const card = document.createElement('a');
-                card.href = item.link;
-                card.className = 'bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col group';
+                data.forEach(item => {
+                    const card = document.createElement('a');
+                    card.href = item.link;
+                    card.className = 'bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col group';
 
-                card.innerHTML = `
-                    <!-- Thumbnail Container -->
-                    <div class="relative aspect-[16/10] bg-gray-900 overflow-hidden">
-                        <img src="${item.bannerUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                        <span class="absolute bottom-2.5 left-2.5 bg-black/70 backdrop-blur-sm text-white text-[11px] font-bold px-2.5 py-1 rounded-md">
-                            ${item.bannerTag}
-                        </span>
-                    </div>
-
-                    <!-- Content -->
-                    <div class="p-4 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-gray-900 text-sm leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
-                                ${item.title}
-                            </h3>
-                            <p class="text-xs text-gray-400 mt-2 flex items-center gap-1.5 font-medium">
-                                <i class="fa-solid fa-location-dot"></i> ${item.location}
-                            </p>
+                    card.innerHTML = `
+                        <div class="relative aspect-[16/10] bg-gray-900 overflow-hidden">
+                            <img src="${item.bannerUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <span class="absolute bottom-2.5 left-2.5 bg-black/70 backdrop-blur-sm text-white text-[11px] font-bold px-2.5 py-1 rounded-md">
+                                ${item.bannerTag}
+                            </span>
                         </div>
-
-                        <!-- Price & Status Footer -->
-                        <div class="mt-4 pt-3 flex items-center justify-between border-t border-gray-100">
-                            <span class="text-sm font-extrabold text-blue-600">${item.priceFormatted}</span>
-                            <span class="text-xs ${item.statusClass}">${item.status}</span>
+                        <div class="p-4 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-sm leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
+                                    ${item.title}
+                                </h3>
+                                <p class="text-xs text-gray-400 mt-2 flex items-center gap-1.5 font-medium">
+                                    <i class="fa-solid fa-location-dot"></i> ${item.location}
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 flex items-center justify-between border-t border-gray-100">
+                                <span class="text-sm font-extrabold text-blue-600">${item.priceFormatted}</span>
+                                <span class="text-xs ${item.statusClass}">${item.status}</span>
+                            </div>
                         </div>
-                    </div>
-                `;
-                eventGrid.appendChild(card);
-            });
-        }
-
-        // Filter Logic
-        function filterAndSort() {
-            const query = searchInput.value.toLowerCase().trim();
-            const sortVal = sortSelect.value;
-
-            let filtered = eventsData.filter(item => {
-                const matchCategory = (currentCategory === 'all') || (item.category === currentCategory);
-                const matchSearch = item.title.toLowerCase().includes(query) || item.location.toLowerCase().includes(query);
-                return matchCategory && matchSearch;
-            });
-
-            if (sortVal === 'price-low') {
-                filtered.sort((a, b) => a.price - b.price);
-            } else if (sortVal === 'price-high') {
-                filtered.sort((a, b) => b.price - a.price);
-            } else {
-                filtered.sort((a, b) => b.popularity - a.popularity);
-            }
-
-            renderEvents(filtered);
-        }
-
-        // Category Tab Handler
-        catBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                catBtns.forEach(b => {
-                    b.classList.remove('bg-blue-600', 'text-white', 'active-btn');
-                    b.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+                    `;
+                    eventGrid.appendChild(card);
                 });
-                btn.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-300');
-                btn.classList.add('bg-blue-600', 'text-white', 'active-btn');
+            }
 
-                currentCategory = btn.getAttribute('data-category');
-                filterAndSort();
+            function filterAndSort() {
+                const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+                const sortVal = sortSelect ? sortSelect.value : 'popular';
+
+                let filtered = eventsData.filter(item => {
+                    const matchCategory = (currentCategory === 'all') || (item.category === currentCategory);
+                    const matchSearch = item.title.toLowerCase().includes(query) || item.location.toLowerCase().includes(query);
+                    return matchCategory && matchSearch;
+                });
+
+                if (sortVal === 'price-low') {
+                    filtered.sort((a, b) => a.price - b.price);
+                } else if (sortVal === 'price-high') {
+                    filtered.sort((a, b) => b.price - a.price);
+                } else {
+                    filtered.sort((a, b) => b.popularity - a.popularity);
+                }
+
+                renderEvents(filtered);
+            }
+
+            catBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    catBtns.forEach(b => {
+                        b.classList.remove('bg-blue-600', 'text-white', 'active-btn');
+                        b.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+                    });
+                    btn.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+                    btn.classList.add('bg-blue-600', 'text-white', 'active-btn');
+
+                    currentCategory = btn.getAttribute('data-category');
+                    filterAndSort();
+                });
             });
+
+            if (searchInput) searchInput.addEventListener('input', filterAndSort);
+            if (sortSelect) sortSelect.addEventListener('change', filterAndSort);
+
+            // Render Awal
+            filterAndSort();
         });
-
-        searchInput.addEventListener('input', filterAndSort);
-        sortSelect.addEventListener('change', filterAndSort);
-
-        // Initial Load
-        filterAndSort();
     </script>
 </body>
 </html>
