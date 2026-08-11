@@ -591,6 +591,39 @@ document.getElementById('form-pembayaran').addEventListener('submit', async func
       });
     }
   });
-</script>   
+</script>
+
+<script>
+  // Tangkap form registrasi
+  const formRegister = document.querySelector('#modal-auth form');
+
+  if (formRegister) {
+    formRegister.addEventListener('submit', async function (e) {
+      e.preventDefault(); // Cegah halaman reload
+
+      // Ambil nilai dari input
+      const name = this.querySelector('input[name="name"]').value;
+      const email = this.querySelector('input[name="email"]').value;
+      const password = this.querySelector('input[name="password"]').value;
+
+      try {
+        // Kirim data ke server.js yang berjalan di localhost (sesuaikan port server.js kamu)
+        const response = await fetch('http://localhost:8080/api/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+        alert(data.message);
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Gagal terhubung ke server!');
+      }
+    });
+  }
+</script>
 </body>
 </html>
