@@ -136,7 +136,6 @@
                     </div>
                 </div>
 
-                // category 1
                 <div class="py-5 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <span class="text-blue-600 font-bold text-sm">Early Bird</span>
@@ -145,13 +144,12 @@
                     </div>
 
                     <div class="flex items-center gap-3">
-                        <button id="btnMinus" class="w-8 h-8 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold flex items-center justify-center transition">-</button>
-                        <span id="ticketQty" class="w-8 text-center font-bold text-gray-800 text-sm">0</span>
-                        <button id="btnPlus" class="w-8 h-8 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center justify-center transition">+</button>
+                        <button id="btnMinus1" class="w-8 h-8 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold flex items-center justify-center transition">-</button>
+                        <span id="ticketQty1" class="w-8 text-center font-bold text-gray-800 text-sm">0</span>
+                        <button id="btnPlus1" class="w-8 h-8 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center justify-center transition">+</button>
                     </div>
                 </div>
 
-                // category 2
                 <div class="py-5 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <span class="text-blue-600 font-bold text-sm">Presale</span>
@@ -309,29 +307,14 @@
         </div>
     </div>
 
-    <!-- 5. JAVASCRIPT LOGIC -->
+    <!-- SCRIPT MULTI-CATEGORY AUTOMATION -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const ticketPrice = 35000;
-            let qty = 0;
-
-            // Tiket Counter
-            const qtyEl = document.getElementById('ticketQty');
+            const ticketRows = document.querySelectorAll('.ticket-row');
             const totalEl = document.getElementById('totalPriceText');
-            const btnMinus = document.getElementById('btnMinus');
-            const btnPlus = document.getElementById('btnPlus');
             const btnPesan = document.getElementById('btnPesan');
 
-            // catergory 2
-            const ticketPrice2 = 50000;
-            let qty2 = 0;
-
-            const qtyEl2 = document.getElementById('ticketQty2');
-            const totalEl2 = document.getElementById('totalPriceText2');
-            const btnMinus2 = document.getElementById('btnMinus2');
-            const btnPlus2 = document.getElementById('btnPlus2');
-
-            // Modal Form
+            // Modal Form & Konfirmasi Elements
             const modalForm = document.getElementById('modalForm');
             const btnCloseModal = document.getElementById('btnCloseModal');
             const btnBatal = document.getElementById('btnBatal');
@@ -342,21 +325,39 @@
             const inputWA = document.getElementById('inputWA');
             const emailError = document.getElementById('emailError');
 
-            // Modal Konfirmasi
             const modalKonfirmasi = document.getElementById('modalKonfirmasi');
             const confirmEmailVal = document.getElementById('confirmEmailVal');
             const confirmWaVal = document.getElementById('confirmWaVal');
+            const confirmCatVal = document.getElementById('confirmCatVal');
             const confirmQtyVal = document.getElementById('confirmQtyVal');
             const btnBatalkanKonfirmasi = document.getElementById('btnBatalkanKonfirmasi');
             const btnYaLanjutkan = document.getElementById('btnYaLanjutkan');
 
-            // Update Counter Tiket
-            function updateCalculator() {
-                qtyEl.innerText = qty;
-                const total = qty * ticketPrice;
-                totalEl.innerText = 'Rp. ' + total.toLocaleString('id-ID');
+            let grandTotal = 0;
+            let totalQty = 0;
+            let selectedCategories = [];
 
-                if (qty > 0) {
+            // Function Hitung Total Seluruh Tiket
+            function calculateTotal() {
+                grandTotal = 0;
+                totalQty = 0;
+                selectedCategories = [];
+
+                ticketRows.forEach(row => {
+                    const price = parseInt(row.getAttribute('data-price'));
+                    const name = row.getAttribute('data-name');
+                    const qty = parseInt(row.querySelector('.ticket-qty').innerText);
+
+                    if (qty > 0) {
+                        grandTotal += price * qty;
+                        totalQty += qty;
+                        selectedCategories.push(`${name} (${qty}x)`);
+                    }
+                });
+
+                totalEl.innerText = 'Rp. ' + grandTotal.toLocaleString('id-ID');
+
+                if (totalQty > 0) {
                     btnPesan.disabled = false;
                     btnPesan.className = 'bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-2.5 rounded-xl text-sm transition cursor-pointer shadow-md';
                 } else {
@@ -365,65 +366,76 @@
                 }
             }
 
-            btnPlus.addEventListener('click', () => { qty++; updateCalculator(); });
-            btnMinus.addEventListener('click', () => { if (qty > 0) { qty--; updateCalculator(); } });
+            // Loop untuk setiap baris kategori tiket
+            ticketRows.forEach(row => {
+                const btnMinus = row.querySelector('.btn-minus');
+                const btnPlus = row.querySelector('.btn-plus');
+                const qtySpan = row.querySelector('.ticket-qty');
 
-            // Buka Modal Form
-            btnPesan.addEventListener('click', () => { modalForm.classList.remove('hidden'); });
+                btnPlus.addEventListener('click', () => {
+                    let currentQty = parseInt(qtySpan.innerText);
+                    currentQty++;
+                    qtySpan.innerText = currentQty;
+                    calculateTotal();
+                });
 
-            // Tutup Modal Form
+                btnMinus.addEventListener('click', () => {
+                    let currentQty = parseInt(qtySpan.innerText);
+                    if (currentQty > 0) {
+                        currentQty--;
+                        qtySpan.innerText = currentQty;
+                        calculateTotal();
+                    }
+                });
+            });
+
+            // Handlers Modal Form
+            btnPesan.addEventListener('click', () => modalForm.classList.remove('hidden'));
             const closeModalForm = () => modalForm.classList.add('hidden');
             btnCloseModal.addEventListener('click', closeModalForm);
             btnBatal.addEventListener('click', closeModalForm);
 
-            // Submit Form -> Buka Modal Konfirmasi
+            // Submit Form
             formCheckout.addEventListener('submit', (e) => {
                 e.preventDefault();
-
                 if (inputEmail.value !== inputConfirmEmail.value) {
                     emailError.classList.remove('hidden');
                     inputConfirmEmail.focus();
                     return;
                 }
-
                 emailError.classList.add('hidden');
 
-                // Set Data ke Modal Konfirmasi
                 confirmEmailVal.innerText = inputEmail.value;
                 let waVal = inputWA.value.trim();
                 if (waVal.startsWith('0')) waVal = waVal.substring(1);
                 confirmWaVal.innerText = '+62 ' + waVal;
-                confirmQtyVal.innerText = qty;
+                confirmQtyVal.innerText = totalQty;
+                confirmCatVal.innerText = selectedCategories.join(', ');
 
-                // Transisi Modal Form ke Modal Konfirmasi
                 closeModalForm();
                 modalKonfirmasi.classList.remove('hidden');
             });
 
-            // Batal di Modal Konfirmasi (Kembali ke Form)
             btnBatalkanKonfirmasi.addEventListener('click', () => {
                 modalKonfirmasi.classList.add('hidden');
                 modalForm.classList.remove('hidden');
             });
 
-            // REDIRECT KE HALAMAN PEMBAYARAN SAAT "YA, LANJUTKAN" DIKLIK
+            // Lanjut Pembayaran
             btnYaLanjutkan.addEventListener('click', () => {
                 let waVal = inputWA.value.trim();
                 if (waVal.startsWith('0')) waVal = waVal.substring(1);
 
-                // Simpan Data Pemesanan sementara ke LocalStorage untuk dipakai di halaman Pembayaran
                 const orderData = {
                     nama: inputNama.value,
                     email: inputEmail.value,
                     wa: '+62 ' + waVal,
-                    qty: qty,
-                    totalHarga: qty * ticketPrice,
+                    qty: totalQty,
+                    totalHarga: grandTotal,
                     eventName: 'Riot City Fest "ANGRY SHOW" 2026',
-                    category: 'Presale / Early Bird'
+                    category: selectedCategories.join(', ')
                 };
                 localStorage.setItem('checkoutOrder', JSON.stringify(orderData));
-
-                // Redirect ke halaman pembayaran
                 window.location.href = 'pembayaran.html';
             });
         });
