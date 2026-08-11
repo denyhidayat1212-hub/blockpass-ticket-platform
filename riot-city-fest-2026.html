@@ -397,6 +397,88 @@ document.getElementById('form-pembayaran').addEventListener('submit', async func
 });
     </script>
 
+  <!-- 4. JAVASCRIPT SYSTEM LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ticketPrice = 35000;
+            let qty = 0;
+
+            // DOM Elements Tiket
+            const qtyEl = document.getElementById('ticketQty');
+            const totalEl = document.getElementById('totalPriceText');
+            const btnMinus = document.getElementById('btnMinus');
+            const btnPlus = document.getElementById('btnPlus');
+            const btnPesan = document.getElementById('btnPesan');
+
+            // DOM Elements Modal Form
+            const modalForm = document.getElementById('modalForm');
+            const btnCloseModal = document.getElementById('btnCloseModal');
+            const btnBatal = document.getElementById('btnBatal');
+            const formCheckout = document.getElementById('formCheckout');
+            const inputEmail = document.getElementById('inputEmail');
+            const inputConfirmEmail = document.getElementById('inputConfirmEmail');
+            const emailError = document.getElementById('emailError');
+
+            // 1. Hitung Jumlah & Total Harga Tiket
+            function updateCalculator() {
+                qtyEl.innerText = qty;
+                const total = qty * ticketPrice;
+                totalEl.innerText = 'Rp. ' + total.toLocaleString('id-ID');
+
+                if (qty > 0) {
+                    btnPesan.disabled = false;
+                    btnPesan.className = 'bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-2.5 rounded-xl text-sm transition cursor-pointer shadow-md';
+                } else {
+                    btnPesan.disabled = true;
+                    btnPesan.className = 'bg-gray-300 text-gray-500 font-bold px-8 py-2.5 rounded-xl text-sm transition cursor-not-allowed';
+                }
+            }
+
+            btnPlus.addEventListener('click', () => {
+                qty++;
+                updateCalculator();
+            });
+
+            btnMinus.addEventListener('click', () => {
+                if (qty > 0) {
+                    qty--;
+                    updateCalculator();
+                }
+            });
+
+            // 2. Buka Modal saat Tombol Pesan Sekarang Diklik
+            btnPesan.addEventListener('click', () => {
+                modalForm.classList.remove('hidden');
+            });
+
+            // 3. Tutup Modal
+            const closeModal = () => {
+                modalForm.classList.add('hidden');
+            };
+
+            btnCloseModal.addEventListener('click', closeModal);
+            btnBatal.addEventListener('click', closeModal);
+
+            // 4. Validasi Form & Submit
+            formCheckout.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Validasi Match Email
+                if (inputEmail.value !== inputConfirmEmail.value) {
+                    emailError.classList.remove('hidden');
+                    inputConfirmEmail.focus();
+                    return;
+                }
+
+                emailError.classList.add('hidden');
+                
+                alert(`Pemesanan Berhasil!\nTotal Tiket: ${qty}\nTotal Pembayaran: Rp. ${(qty * ticketPrice).toLocaleString('id-ID')}\n\nInstruksi pembayaran telah dikirimkan ke email ${inputEmail.value}`);
+                
+                closeModal();
+            });
+        });
+    </script>
+    
   <script>
   document.addEventListener('DOMContentLoaded', () => {
     const slider = document.getElementById('sliderContainer');
