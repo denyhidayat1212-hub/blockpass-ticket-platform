@@ -20,37 +20,84 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased font-sans">
+<body class="bg-gray-50 text-gray-800 antialiased">
 
-    <!-- NAVBAR (Persis seperti screenshot index.html) -->
-    <header class="bg-white text-gray-800 border-b border-gray-200 sticky top-0 z-40 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+    <!-- 1. NAVBAR -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
             
-            <!-- Logo & Main Search -->
-            <div class="flex items-center gap-6 flex-1">
-                <a href="index.html" class="flex items-center gap-2 text-xl font-black tracking-wider text-blue-700">
-                    <span class="bg-blue-600 text-white px-2 py-0.5 rounded-lg text-sm font-bold">BP</span> BLOCKPASS
+            <!-- Logo & Kategori -->
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="h-9 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bpGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#1E40AF" />
+    </linearGradient>
+  </defs>
+
+  <!-- ICON -->
+  <g transform="translate(15, 15)">
+    <!-- Back Card / Layer -->
+    <rect x="18" y="5" width="45" height="55" rx="10" fill="#FBBF24" transform="rotate(12 40 30)" />
+    <!-- Front Card -->
+    <rect x="5" y="10" width="50" height="50" rx="12" fill="url(#bpGrad2)" />
+    <!-- Ticket Holes -->
+    <circle cx="5" cy="35" r="5" fill="#FFFFFF" />
+    <circle cx="55" cy="35" r="5" fill="#FFFFFF" />
+    <!-- QR Code / Chip Pattern -->
+    <rect x="21" y="24" width="18" height="18" rx="4" fill="#FFFFFF" opacity="0.9" />
+    <rect x="26" y="29" width="8" height="8" rx="1" fill="#1E40AF" />
+  </g>
+
+  <!-- TEKS BRAND -->
+  <text x="95" y="58" font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="800" font-size="34" fill="#1E293B">
+    BLOCK<tspan fill="#3B82F6">PASS</tspan>
+  </text>
+  <text x="96" y="74" font-family="sans-serif" font-weight="600" font-size="10" fill="#64748B" letter-spacing="3">TICKET PLATFORM</text>
+</svg>
+
+                      <defs>
+                        <linearGradient id="blockpassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#4F46E5" />
+                          <stop offset="100%" stop-color="#06B6D4" />
+                        </linearGradient>
+                      </defs>
+                      <g transform="translate(10, 10)">
+                        <rect x="5" y="5" width="55" height="70" rx="12" fill="url(#blockpassGrad)" opacity="0.15" />
+                        <path d="M15 15 C15 9.47715 19.4772 5 25 5 H50 C55.5228 5 60 9.47715 60 15 V32 C56 32 53 35 53 40 C53 45 56 48 60 48 V65 C60 70.5228 55.5228 75 50 75 H25 C19.4772 75 15 70.5228 15 65 V15 Z" fill="url(#blockpassGrad)" />
+                        <path d="M32 25 H45 C47.5 25 49 26.5 49 29 C49 31.5 47.5 33 45 33 H32 V25 Z" fill="#FFFFFF" />
+                        <path d="M32 41 H43 C45.5 41 47 42.5 47 45 C47 47.5 45.5 49 43 49 H32 V41 Z" fill="#FFFFFF" />
+                        <circle cx="25" cy="40" r="3" fill="#FFFFFF" opacity="0.8" />
+                      </g>
+                    </svg>
                 </a>
-                
-                <div class="flex-1 max-w-lg hidden sm:block">
-                    <div class="relative">
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                        <input type="text" id="searchInput" placeholder="Cari event konser, atau festival..." class="w-full bg-gray-100 text-gray-800 pl-10 pr-4 py-2 rounded-full text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-                    </div>
-                </div>
             </div>
 
-            <!-- Right Actions -->
-            <div class="flex items-center gap-3 md:gap-5">
-                <a href="#" class="hidden md:flex items-center gap-1.5 text-xs md:text-sm font-bold text-blue-600 hover:text-blue-700">
-                    <i class="fa-solid fa-circle-plus"></i> Buat Event & Bermitra
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-xl relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input type="text" placeholder="Cari event konser, atau festival..." 
+                       class="w-full pl-11 pr-4 py-2 bg-gray-100 border border-transparent rounded-full focus:outline-none focus:bg-white focus:border-blue-500 transition-all text-sm">
+            </div>
+
+            <!-- Right Menu / Actions -->
+            <div class="flex items-center gap-5 text-sm font-medium text-gray-700">
+                <!-- FITUR 1: Mempermudah Mitra Buat Event -->
+                <button onclick="toggleModal('modal-mitra')" class="hidden lg:block text-blue-600 hover:text-blue-800 font-semibold cursor-pointer">
+                    <i class="fa-solid fa-plus-circle mr-1"></i> Buat Event & Bermitra
+                </button>
+                
+                <!-- FITUR 2: Akses Cepat Kelola Event Lu (Admin) -->
+                <a href="admin.html" class="text-gray-600 hover:text-gray-900 font-medium cursor-pointer flex items-center">
+                    <i class="fa-solid fa-sliders mr-1"></i> Panel Admin
                 </a>
-                <a href="#" class="hidden md:flex items-center gap-1.5 text-xs md:text-sm font-medium text-gray-600 hover:text-gray-900">
-                    <i class="fa-solid fa-table-columns"></i> Panel Admin
-                </a>
-                <a href="#" class="bg-[#1e293b] hover:bg-slate-800 text-white font-bold px-5 py-2 rounded-full text-xs md:text-sm transition">
-                    <i class="fa-regular fa-user mr-1.5"></i> Masuk / Daftar
-                </a>
+
+                <!-- FITUR 3: Registrasi / Login Pembeli Tiket Mudah -->
+                <button onclick="toggleModal('modal-auth')" class="flex items-center gap-2 bg-blue-950 text-white px-5 py-2 rounded-full hover:bg-blue-900 transition-colors shadow-sm font-semibold cursor-pointer">
+                    <i class="fa-regular fa-user-circle text-lg"></i> Masuk / Daftar
+                </button>
             </div>
         </div>
     </header>
